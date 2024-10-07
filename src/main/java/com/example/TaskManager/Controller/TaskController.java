@@ -6,10 +6,7 @@ import com.example.TaskManager.Model.Task;
 import com.example.TaskManager.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +18,11 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/")
+    @GetMapping
     public String listTasks(Model model) {
         List<Task> tasks = taskService.getTasks();
-        model.addAttribute("tasks", taskService.getTasks());
-        return "index";
+        model.addAttribute("tasks", tasks);
+        return "task/view";
     }
 
     @GetMapping("/create")
@@ -38,6 +35,12 @@ public class TaskController {
     public String createTask(@ModelAttribute Task task) {
         taskService.saveTask(task);
         return "redirect:/tasks/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTask(@PathVariable int id) {
+        taskService.deleteTask(id);
+        return "redirect:/tasks";
     }
 
 

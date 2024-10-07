@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-
     @GetMapping("/")
-    public String index() {
+    public String home() {
         return "index";
     }
 
@@ -27,6 +26,5 @@ public class HomeController {
     public String create() {
         return "task/create";
     }
-
 
 }
