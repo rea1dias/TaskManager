@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,4 +30,15 @@ public class TaskServiceImpl implements TaskService {
     public void deleteTask(int id) {
         taskRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Task> getTaskById(int id) {
+        return taskRepository.findById(id);
+    }
+
+    @Override
+    public void updateTask(int id, Task updatedTask) {
+        taskRepository.save(updatedTask);
+    }
+
 }
